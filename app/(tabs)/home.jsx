@@ -1,17 +1,27 @@
 import { BlurView } from 'expo-blur';
+import { collection, getDocs, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Image, ImageBackground, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import logo from "../../assets/images/dinetimelogo.png";
 import banner from "../../assets/images/homeBanner.png";
-import { restaurants } from '../../store/restaurants';
+import { db } from '../../config/firebaseConfig';
 
-const home = () => {
-    const [rest, setRest] = useState([]);
+const Home = () => {
+
+    const [restaurants, setRestaurants] = useState([]);
 
     useEffect(() => {
-        setRest(restaurants)
+        getRestaurants();
     }, [])
+
+    const getRestaurants = async () => {
+        const q = query(collection(db, 'restaurants'));
+        const res = await getDocs(q);
+        res.forEach(item => {
+            setRestaurants((prev) => [...prev, item.data()])
+        })
+    }
 
     const renderItem = ({ item }) => (
         <TouchableOpacity className="bg-[#5f5f5f] max-h-64 max-w-xs flex justify-center rounded-lg p-4 mx-4 shadow-md">
@@ -44,18 +54,18 @@ const home = () => {
                     <Text className="text-3xl font-semibold mr-2 text-white">Special Discount %</Text>
                 </View>
                 {
-                    rest.length > 0 ? (
-                        <FlatList data={rest} renderItem={renderItem} horizontal contentContainerStyle={{ padding: 16 }} showsHorizontalScrollIndicator={false} scrollEnabled={true} />
+                    restaurants.length > 0 ? (
+                        <FlatList data={restaurants} renderItem={renderItem} horizontal contentContainerStyle={{ padding: 16 }} showsHorizontalScrollIndicator={false} scrollEnabled={true} />
                     ) : (
-                        <ActivityIndicator animating color={'#fb9b33'} />
+                        <ActivityIndicator animating color={'#fff'} />
                     )
                 }
                 <View className="p-4 bg-[#2b2b2b] flex-row items-center">
                     <Text className="text-3xl font-semibold mr-2 text-[#fb9b33]">Our Restaurants</Text>
                 </View>
                 {
-                    rest.length > 0 ? (
-                        <FlatList data={rest} renderItem={renderItem} horizontal contentContainerStyle={{ padding: 16 }} showsHorizontalScrollIndicator={false} scrollEnabled={true} />
+                    restaurants.length > 0 ? (
+                        <FlatList data={restaurants} renderItem={renderItem} horizontal contentContainerStyle={{ padding: 16 }} showsHorizontalScrollIndicator={false} scrollEnabled={true} />
                     ) : (
                         <ActivityIndicator animating color={'#fb9b33'} />
                     )
@@ -68,4 +78,4 @@ const home = () => {
     )
 }
 
-export default home
+export default Home;
