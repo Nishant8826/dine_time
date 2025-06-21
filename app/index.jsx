@@ -18,7 +18,7 @@ export default function Index() {
             <TouchableOpacity onPress={() => router.push('/signup')} className="p-2 my-2 bg-[#f49b33] text-black rounded-lg">
               <Text className="text-lg text-center font-semibold">Sign up</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => router.push('/guest')} className="p-2 my-2 border border-[#f49b33] bg-[#2b2b2b] text-[#f49b33] rounded-lg">
+            <TouchableOpacity onPress={() => router.push('/home')} className="p-2 my-2 border border-[#f49b33] bg-[#2b2b2b] text-[#f49b33] rounded-lg">
               <Text className="text-lg text-center font-semibold text-[#f49b33]">Guest User</Text>
             </TouchableOpacity>
           </View>
