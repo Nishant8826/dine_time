@@ -1,4 +1,5 @@
 import { BlurView } from 'expo-blur';
+import { useRouter } from 'expo-router';
 import { collection, getDocs, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Image, ImageBackground, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
@@ -8,6 +9,9 @@ import banner from "../../assets/images/homeBanner.png";
 import { db } from '../../config/firebaseConfig';
 
 const Home = () => {
+
+
+    const router = useRouter();
 
     const [restaurants, setRestaurants] = useState([]);
 
@@ -24,7 +28,7 @@ const Home = () => {
     }
 
     const renderItem = ({ item }) => (
-        <TouchableOpacity className="bg-[#5f5f5f] max-h-64 max-w-xs flex justify-center rounded-lg p-4 mx-4 shadow-md">
+        <TouchableOpacity onPress={() => router.push(`/restaurant/${item.name}`)} className="bg-[#5f5f5f] max-h-64 max-w-xs flex justify-center rounded-lg p-4 mx-4 shadow-md">
             <Image resizeMode='cover' source={{ uri: item.image }} className="h-28 mt-2 mb-1 rounded-lg" />
             <Text className="text-white text-lg font-bold mb-2">{item.name}</Text>
             <Text className="text-white text-base mb-2">{item.address}</Text>
@@ -44,7 +48,7 @@ const Home = () => {
                     </View>
                 </View>
             </View>
-            <ScrollView stickyHeaderIndices={[0]}>
+            <ScrollView stickyHeaderIndices={[0]} className="h-full">
                 <ImageBackground source={banner} resizeMode='cover' className="mb-4 bg-[#2b2b2b] w-full h-52 items-center justify-center">
                     <BlurView intensity={100} tint='dark' className="w-full p-4 shadow-lg">
                         <Text className="text-center text-4xl font-bold text-white">Dine with your loved ones</Text>

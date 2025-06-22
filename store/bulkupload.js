@@ -16,12 +16,12 @@ export const uploadData = async () => {
         }
         for (let i = 0; i < carouselImagesData.length; i++) {
             const rest = carouselImagesData[i];
-            const docRef = doc(collection(db, "carousel"), `restaurant_${i + 1}`)
+            const docRef = doc(collection(db, "carousel"), `carousel_${i + 1}`)
             await setDoc(docRef, rest);
         }
         for (let i = 0; i < slotsData.length; i++) {
             const rest = slotsData[i];
-            const docRef = doc(collection(db, "slots"), `restaurant_${i + 1}`)
+            const docRef = doc(collection(db, "slots"), `slot_${i + 1}`)
             await setDoc(docRef, rest);
             console.log('Restaurant Data uploaded successfully')
         }
