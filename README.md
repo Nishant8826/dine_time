@@ -1,8 +1,12 @@
-# Welcome to your Expo app 👋
-
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# Welcome to Dine-Time app 👋
 
 ## Get started
+
+1. use node 
+
+   ```
+   nvm use 22.12.0
+   ```
 
 1. Install dependencies
 
@@ -13,7 +17,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 2. Start the app
 
    ```bash
-   npx expo start
+   npm start
    ```
 
 In the output, you'll find options to open the app in a
