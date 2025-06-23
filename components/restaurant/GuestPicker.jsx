@@ -12,7 +12,7 @@ const GuestPicker = ({ guestCount, setGuestCount }) => {
             <TouchableOpacity onPress={decrement} className="rounded">
                 <Text className="text-white text-lg border border-[#f49b33] rounded-l-lg px-3">-</Text>
             </TouchableOpacity>
-            <Text className="px-3 text-white bg-[#474747] border border-[#474747] text-lg">{guestCount}</Text>
+            <Text className="px-3 text-white bg-[#474747] border border-[#474747] text-lg mx-1">{guestCount}</Text>
             <TouchableOpacity onPress={increment} className="rounded">
                 <Text className="text-white text-lg border border-[#f49b33] rounded-r-lg px-3">+</Text>
             </TouchableOpacity>

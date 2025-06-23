@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Dimensions, FlatList, Image, Linking, Platform, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DateTimePickerComponent from '../../components/restaurant/DateTimePickerComponent';
+import Findslots from '../../components/restaurant/Findslots';
 import GuestPicker from '../../components/restaurant/GuestPicker';
 import { db } from "../../config/firebaseConfig";
 
@@ -19,6 +20,7 @@ const Restaurant = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [date, setDate] = useState(new Date());
     const [guestCount, setGuestCount] = useState(2);
+    const [selectedSlot, setSelectedSlot] = useState(null);
 
 
     const getRestaturantData = async () => {
@@ -54,7 +56,7 @@ const Restaurant = () => {
                     slots.push(doc.data());
                 })
 
-                setSlotsData(slots);
+                setSlotsData(slots[0]?.slot);
 
 
             }
@@ -153,7 +155,7 @@ const Restaurant = () => {
                     <Text className="text-white max-w-[75%] font-semibold mx-1">{restaurantData.opening} - {restaurantData.closing} </Text>
                 </View>
 
-                <View className="">
+                <View className="flex-1 border border-[#f49b33] rounded-lg m-2 p-2">
                     <View className="flex-1 flex-row m-2 p-2 justify-end items-center">
                         <View className="flex-1 flex-row items-center">
                             <Ionicons name='calendar' size={24} color="#f49b33" />
@@ -168,6 +170,10 @@ const Restaurant = () => {
                         </View>
                         <GuestPicker guestCount={guestCount} setGuestCount={setGuestCount} />
                     </View>
+                </View>
+
+                <View className="flex-1">
+                    <Findslots date={date} guestCount={guestCount} slots={slotsData} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} />
                 </View>
             </ScrollView>
         </SafeAreaView>
